@@ -3,9 +3,9 @@ require 'securerandom'
 
 module Rdiff3
   def self.merge3(my_string,my_tag,old_string,old_tag,your_string,your_tag)
-    home_dir = ENV['HOME']
+#    home_dir = ENV['HOME']
     default_dir = `pwd`.chomp
-    Dir.chdir(home_dir)
+#    Dir.chdir(home_dir)
     now = Time.now
     now_text = now.strftime("%Y-%m-%d-%H-%M-%S")
     working_dir = "#{SecureRandom.hex(3)}-#{now_text}"
@@ -21,16 +21,16 @@ module Rdiff3
     File.delete(my_tag)
     File.delete(old_tag)
     File.delete(your_tag)
-    Dir.chdir(home_dir)
-    Dir::delete(working_dir)
+#    Dir.chdir(home_dir)
     Dir.chdir(default_dir)
+    Dir::delete(working_dir)
     text
   end
 
   def self.diff(original_string,original_tag,new_string,new_tag)
-    home_dir = ENV['HOME']
+#    home_dir = ENV['HOME']
     default_dir = `pwd`.chomp
-    Dir.chdir(home_dir)
+#    Dir.chdir(home_dir)
     now = Time.now
     now_text = now.strftime("%Y-%m-%d-%H-%M-%S")
     working_dir = "#{SecureRandom.hex(3)}-#{now_text}"
@@ -43,9 +43,9 @@ module Rdiff3
     text = `diff -u #{original_tag} #{new_tag}`
     File.delete(original_tag)
     File.delete(new_tag)
-    Dir.chdir(home_dir)
-    Dir::delete(working_dir)
+#    Dir.chdir(home_dir)
     Dir.chdir(default_dir)
+    Dir::delete(working_dir)
     text
   end
 end
